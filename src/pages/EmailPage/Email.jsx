@@ -1,9 +1,9 @@
-import { EmailCardComponent } from "../../Component/EmailComponents/EmailCardComponent";
+// import { EmailCardComponent } from "../../Component/EmailComponents/EmailCardComponent";
 const Email = () => {
   return (
     <div>
       Email
-      <EmailCardComponent />
+      {/* <EmailCardComponent /> */}
     </div>
   );
 };
