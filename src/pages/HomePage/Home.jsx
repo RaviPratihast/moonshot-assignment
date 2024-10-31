@@ -9,13 +9,13 @@ const Home = () => {
         </h1>
         <p className="text-gray-600 mb-8">Select the assignment</p>
         <div className="flex flex-col gap-4">
-          <Link to="/email-assignment">
+          <Link to="/email">
             <button className="w-full py-3 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition duration-300 ease-in-out">
               Email Assignment
             </button>
           </Link>
 
-          <Link to="/dashboard-assignment">
+          <Link to="/dashboard">
             <button className="w-full py-3 px-4 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition duration-300 ease-in-out">
               Dashboard Assignment
             </button>

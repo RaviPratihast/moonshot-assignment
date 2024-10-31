@@ -1,28 +1,32 @@
-const EmailCardComponent = () => {
-  return (
-    <div className="border border-accent  rounded-lg p-4 max-w-md mx-auto my-4 flex items-start gap-4">
-      {/* avatar circle will be here */}
-      <div className="flex items-center justify-center h-12 w-12 bg-accent rounded-full text-white font-bold text-xl">
-        F
-      </div>
-      {/* details of the email wil be here */}
+import { formattedDate } from "../../utils/dateUtils/dateUtils";
+import { Avatar } from "./Avatar";
+const EmailCardComponent = ({ data, onClick }) => {
+  const GetFormattedDate = formattedDate(data.date);
 
+  return (
+    <div
+      className={`border border-border rounded-lg p-4 mt-6 mb-6 flex items-start gap-4`}
+      onClick={onClick}
+    >
+      <Avatar>{data.from.name[0].toUpperCase()}</Avatar>
       <div>
         <p className="text-sm text-text">
-          From: <span className="font-bold">Foo Bar</span> &lt;
-          <span className="font-normal text-gray-700">foo.bar@gmail.com</span>
+          From: <span className="font-bold">{data.from.name}</span> &lt;
+          <span className="font-normal text-gray-700">{data.from.email}</span>
           &gt;
         </p>
         <p className="text-sm text-text">
-          Subject: <span className="font-bold">Lorem Ipsum</span>
+          Subject: <span className="font-bold">{data.subject}</span>
         </p>
-        <p className="text-text text-sm truncate">
-          Vestibulum sit amet ipsum aliquet, lacinia ...
+        <p className="text-text text-sm">
+          {data.short_description.length > 40
+            ? `${data.short_description.substring(0, 40)}...`
+            : data.short_description}
         </p>
-        <p className="text-xs text-gray-400 mt-2">26/02/2020 10:30am</p>
+        <p className="text-xs text-gray-400 mt-2">{GetFormattedDate}</p>
       </div>
     </div>
-  );                                                        
+  );
 };
 
 export { EmailCardComponent };
