@@ -1,28 +1,45 @@
-const EmailCardComponent = () => {
-  return (
-    <div className="border border-accent  rounded-lg p-4 max-w-md mx-auto my-4 flex items-start gap-4">
-      {/* avatar circle will be here */}
-      <div className="flex items-center justify-center h-12 w-12 bg-accent rounded-full text-white font-bold text-xl">
-        F
-      </div>
-      {/* details of the email wil be here */}
+import { formattedDate } from "../../utils/dateUtils/dateUtils";
+import { Avatar } from "./Avatar";
+import { useEmail } from "../../Contexts/EmailContext";
+const EmailCardComponent = ({ data, onClick, isSelected }) => {
+  const GetFormattedDate = formattedDate(data.date);
+  const { toggleFavorite } = useEmail();
 
+  const borderColor = isSelected ? "border-red-500" : "border-border";
+  const bgColor = data.isFavorite ? "bg-readBackground" : "bg-background";
+
+  return (
+    <div
+      className={`border rounded-lg p-4 mt-6 mb-6 flex items-start gap-4 cursor-pointer ${borderColor} ${bgColor}`}
+      onClick={onClick}
+    >
+      <Avatar>{data.from.name[0].toUpperCase()}</Avatar>
       <div>
         <p className="text-sm text-text">
-          From: <span className="font-bold">Foo Bar</span> &lt;
-          <span className="font-normal text-gray-700">foo.bar@gmail.com</span>
+          From: <span className="font-bold">{data.from.name}</span> &lt;
+          <span className="font-normal text-gray-700">{data.from.email}</span>
           &gt;
         </p>
         <p className="text-sm text-text">
-          Subject: <span className="font-bold">Lorem Ipsum</span>
+          Subject: <span className="font-bold">{data.subject}</span>
         </p>
-        <p className="text-text text-sm truncate">
-          Vestibulum sit amet ipsum aliquet, lacinia ...
+        <p className="text-text text-sm">
+          {data.short_description.length > 40
+            ? `${data.short_description.substring(0, 40)}...`
+            : data.short_description}
         </p>
-        <p className="text-xs text-gray-400 mt-2">26/02/2020 10:30am</p>
+        <div className="flex justify-start items-center  gap-4 mt-2">
+          <p className="text-xs text-text ">{GetFormattedDate}</p>
+          <button
+            onClick={() => toggleFavorite(data.id)}
+            className="text-accent font-bold text-xs"
+          >
+            {data.isFavorite ? " Favorite " : ""}
+          </button>
+        </div>
       </div>
     </div>
-  );                                                        
+  );
 };
 
 export { EmailCardComponent };
