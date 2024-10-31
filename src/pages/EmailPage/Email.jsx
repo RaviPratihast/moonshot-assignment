@@ -1,4 +1,3 @@
-// Email.js
 import { useState } from "react";
 import {
   EmailCardComponent,
@@ -9,7 +8,7 @@ import { GrFormPrevious } from "react-icons/gr";
 import { MdOutlineNavigateNext } from "react-icons/md";
 
 const Email = () => {
-  const { stateEmail, toggleFavorite, markAsRead, setFilter } = useEmail();
+  const { stateEmail, markAsRead, setFilter } = useEmail();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedEmailId, setSelectedEmailId] = useState(null);
   const [selectedEmailBody, setSelectedEmailBody] = useState(null);
@@ -18,7 +17,6 @@ const Email = () => {
   const totalEmails = stateEmail?.data?.length || 0;
   const totalPages = Math.ceil(totalEmails / itemsPerPage);
 
-  // Filter emails based on the selected filter
   const filteredEmails = stateEmail.data.filter((email) => {
     if (stateEmail.filter === "all") return true;
     if (stateEmail.filter === "read") return email.isRead;
@@ -58,19 +56,61 @@ const Email = () => {
     }
   };
 
+  console.log(stateEmail.data);
+
   return (
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 bg-background flex justify-start items-center w-full gap-2 pl-12 pt-12  ">
         <h3 className="">Filter By:</h3>
-        <div className="flex  ml-1 gap-4 h-8 ">
-          <button onClick={() => setFilter("all")}>All</button>
-          <button onClick={() => setFilter("unread")}>Unread</button>
-          <button onClick={() => setFilter("read")}>Read</button>
-          <button onClick={() => setFilter("favorite")}>Favorites</button>
+        <div className="flex justify-center items-center text-sm ml-1 gap-4 h-8">
+          <button
+            onClick={() => setFilter("all")}
+            className={`${
+              stateEmail.filter === "all"
+                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
+                : "text-black"
+            } p-2 rounded`}
+          >
+            All
+          </button>
+          <button
+            onClick={() => setFilter("unread")}
+            className={`${
+              stateEmail.filter === "unread"
+                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
+                : "text-black"
+            } p-2 rounded`}
+          >
+            Unread
+          </button>
+          <button
+            onClick={() => setFilter("read")}
+            className={`${
+              stateEmail.filter === "read"
+                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
+                : "text-black"
+            } p-2 rounded`}
+          >
+            Read
+          </button>
+          <button
+            onClick={() => setFilter("favorite")}
+            className={`${
+              stateEmail.filter === "favorite"
+                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
+                : "text-black"
+            } p-2 rounded`}
+          >
+            Favorites
+          </button>
         </div>
       </header>
-      <div className="min-h-screen flex bg-background border-2 border-green-500">
-        <div className="ml-10 mr-10 w-auto h-[calc(100vh-6rem)] mt-20">
+      <div className="min-h-screen flex bg-background ">
+        <div
+          className={`ml-10 mr-10 ${
+            selectedEmailBody ? "w-[22%]" : "w-[100%]"
+          } h-[calc(100vh-6rem)] mt-20`}
+        >
           <div className="h-full overflow-y-scroll scrollbar-hide no-scrollbar ">
             {currentEmails.length > 0 ? (
               currentEmails.map((data) => (
@@ -82,7 +122,9 @@ const Email = () => {
                 />
               ))
             ) : (
-              <p>No emails to display.</p>
+              <div className="w-full h-auto flex justify-center mt-10">
+                <p>No emails to display.</p>
+              </div>
             )}
             <div className="flex justify-center items-center gap-2 p-2 mt-4">
               <button
@@ -106,7 +148,7 @@ const Email = () => {
           </div>
         </div>
         <div className="mr-2">
-          <EmailDetails emailData={selectedEmailBody} />
+          {selectedEmailBody && <EmailDetails emailData={selectedEmailBody} />}
         </div>
       </div>
     </div>
