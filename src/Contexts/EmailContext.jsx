@@ -9,6 +9,7 @@ const initialState = {
   data: [],
   loading: true,
   error: null,
+  filter: "all",
 };
 const EmailProvider = ({ children }) => {
   const [stateEmail, dispatchEmail] = useReducer(EmailReducer, initialState);
@@ -28,9 +29,17 @@ const EmailProvider = ({ children }) => {
 
     fetchData();
   }, []);
+  const toggleFavorite = (id) =>
+    dispatchEmail({ type: "TOGGLE_FAVORITE", payload: id });
+  const markAsRead = (id) =>
+    dispatchEmail({ type: "MARK_AS_READ", payload: id });
+  const setFilter = (filter) =>
+    dispatchEmail({ type: "SET_FILTER", payload: filter });
 
   return (
-    <EmailContext.Provider value={{ stateEmail, dispatchEmail }}>
+    <EmailContext.Provider
+      value={{ stateEmail, toggleFavorite, markAsRead, setFilter }}
+    >
       {children}
     </EmailContext.Provider>
   );
