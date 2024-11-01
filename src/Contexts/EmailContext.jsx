@@ -9,7 +9,7 @@ const initialState = {
   data: [],
   loading: true,
   error: null,
-  filter: "all",
+  filter: "unread",
 };
 const EmailProvider = ({ children }) => {
   const [stateEmail, dispatchEmail] = useReducer(EmailReducer, initialState);

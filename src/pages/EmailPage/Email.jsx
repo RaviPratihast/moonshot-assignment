@@ -18,13 +18,13 @@ const Email = () => {
   const totalPages = Math.ceil(totalEmails / itemsPerPage);
 
   const filteredEmails = stateEmail.data.filter((email) => {
-    if (stateEmail.filter === "all") return true;
+    // if (stateEmail.filter === "all") return true;
+    if (stateEmail.filter === "unread") return true;
     if (stateEmail.filter === "read") return email.isRead;
-    if (stateEmail.filter === "unread") return !email.isRead;
     if (stateEmail.filter === "favorite") return email.isFavorite;
     return true;
   });
-
+  console.log("filteredEmails", filteredEmails);
   const currentEmails = filteredEmails.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -62,8 +62,8 @@ const Email = () => {
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 bg-background flex justify-start items-center w-full gap-2 pl-12 pt-12  ">
         <h3 className="">Filter By:</h3>
-        <div className="flex justify-center items-center text-sm ml-1 gap-4 h-8">
-          <button
+        <div className="flex justify-start items-center text-sm ml-1 gap-2 h-8 w-[25%]">
+          {/* <button
             onClick={() => setFilter("all")}
             className={`${
               stateEmail.filter === "all"
@@ -72,14 +72,14 @@ const Email = () => {
             } p-2 rounded`}
           >
             All
-          </button>
+          </button> */}
           <button
             onClick={() => setFilter("unread")}
             className={`${
               stateEmail.filter === "unread"
-                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
+                ? " bg-gray-200 border border-border text-text rounded-3xl flex justify-center items-center"
                 : "text-black"
-            } p-2 rounded`}
+            } px-4 py-1  rounded`}
           >
             Unread
           </button>
@@ -87,9 +87,9 @@ const Email = () => {
             onClick={() => setFilter("read")}
             className={`${
               stateEmail.filter === "read"
-                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
+                ? " bg-gray-200 border border-border text-text rounded-3xl flex justify-center items-center"
                 : "text-black"
-            } p-2 rounded`}
+            } px-4 py-1  rounded`}
           >
             Read
           </button>
@@ -97,9 +97,9 @@ const Email = () => {
             onClick={() => setFilter("favorite")}
             className={`${
               stateEmail.filter === "favorite"
-                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
+                ? " bg-gray-200 border border-border text-text rounded-3xl flex justify-center items-center"
                 : "text-black"
-            } p-2 rounded`}
+            } px-4 py-1 rounded`}
           >
             Favorites
           </button>
@@ -126,25 +126,27 @@ const Email = () => {
                 <p>No emails to display.</p>
               </div>
             )}
-            <div className="flex justify-center items-center gap-2 p-2 mt-4">
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-                className="p-2 bg-accent text-white rounded disabled:opacity-50"
-              >
-                <GrFormPrevious />
-              </button>
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-                className="p-2 bg-accent text-white rounded disabled:opacity-50"
-              >
-                <MdOutlineNavigateNext />
-              </button>
-            </div>
+            {currentEmails.length > 0 && (
+              <div className="flex justify-center items-center gap-2 p-2 mt-4">
+                <button
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                  className="p-2 bg-accent text-white rounded disabled:opacity-50"
+                >
+                  <GrFormPrevious />
+                </button>
+                <span>
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                  className="p-2 bg-accent text-white rounded disabled:opacity-50"
+                >
+                  <MdOutlineNavigateNext />
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="mr-2">
