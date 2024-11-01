@@ -126,25 +126,27 @@ const Email = () => {
                 <p>No emails to display.</p>
               </div>
             )}
-            <div className="flex justify-center items-center gap-2 p-2 mt-4">
-              <button
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-                className="p-2 bg-accent text-white rounded disabled:opacity-50"
-              >
-                <GrFormPrevious />
-              </button>
-              <span>
-                Page {currentPage} of {totalPages}
-              </span>
-              <button
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-                className="p-2 bg-accent text-white rounded disabled:opacity-50"
-              >
-                <MdOutlineNavigateNext />
-              </button>
-            </div>
+            {currentEmails.length > 0 && (
+              <div className="flex justify-center items-center gap-2 p-2 mt-4">
+                <button
+                  onClick={handlePreviousPage}
+                  disabled={currentPage === 1}
+                  className="p-2 bg-accent text-white rounded disabled:opacity-50"
+                >
+                  <GrFormPrevious />
+                </button>
+                <span>
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                  className="p-2 bg-accent text-white rounded disabled:opacity-50"
+                >
+                  <MdOutlineNavigateNext />
+                </button>
+              </div>
+            )}
           </div>
         </div>
         <div className="mr-2">
