@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Email, Dashboard } from "./pages/index-page";
+import { Home, Email } from "./pages/index-page";
 const App = () => {
   return (
     <>
