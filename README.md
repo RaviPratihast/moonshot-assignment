@@ -1,8 +1,45 @@
-# React + Vite
+# Moonshot Assignment Email 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+This project is an email application where users can read emails within categories. The application allows users to filter emails by unread, read, and favorite statuses. [Project Link](https://moonshotemailassignment.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Table of Contents
+ * Features
+ * Getting Started
+ * Tech Stack
+ 
+## Features
+* Users can filter emails by status: unread, read, and favorite.
+* Efficient state management of emails using React's `useReducer` and `useContext` hooks.
+* Responsive layout for a seamless experience on any device.
+* Pagination for efficient browsing through large volumes of emails.
+
+
+
+## Getting Started
+ 1. Clone the repository
+```bash
+
+   git clone git@github.com:RaviPratihast/moonshot-assignment.git
+
+```
+2. Install the dependencies
+
+```
+  npm install
+```
+3. Start the development server
+```
+ npm run dev
+```
+
+## Tech Stack
+* React.js, TailwindCSS, HTML
+* State Management: useReducer, useContext, useReducer
+* React Router 
+* Vite 
+
+
+
+
