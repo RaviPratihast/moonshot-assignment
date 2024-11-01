@@ -7,12 +7,10 @@ const EmailDetails = ({ emailData }) => {
 
   const { id, body } = emailData;
 
-  console.log("stateEmail", stateEmail.data[0]);
   const selectedEmailFromList = stateEmail.data.filter(
     (data) => data.id === id
   );
 
-  console.log("selectedEmailData", selectedEmailFromList[0].isFavorite);
   const GetFormattedDate = formattedDate(selectedEmailFromList[0].date);
 
   return (

@@ -18,13 +18,12 @@ const Email = () => {
   const totalPages = Math.ceil(totalEmails / itemsPerPage);
 
   const filteredEmails = stateEmail.data.filter((email) => {
-    // if (stateEmail.filter === "all") return true;
     if (stateEmail.filter === "unread") return true;
     if (stateEmail.filter === "read") return email.isRead;
     if (stateEmail.filter === "favorite") return email.isFavorite;
     return true;
   });
-  console.log("filteredEmails", filteredEmails);
+
   const currentEmails = filteredEmails.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -56,23 +55,11 @@ const Email = () => {
     }
   };
 
-  console.log(stateEmail.data);
-
   return (
     <div className="min-h-screen bg-background">
       <header className="fixed top-0 bg-background flex justify-start items-center w-full gap-2 pl-12 pt-12  ">
         <h3 className="">Filter By:</h3>
         <div className="flex justify-start items-center text-sm ml-1 gap-2 h-8 w-[25%]">
-          {/* <button
-            onClick={() => setFilter("all")}
-            className={`${
-              stateEmail.filter === "all"
-                ? " bg-gray-200 text-text rounded-3xl w-12 px-8 h-5 flex justify-center items-center"
-                : "text-black"
-            } p-2 rounded`}
-          >
-            All
-          </button> */}
           <button
             onClick={() => setFilter("unread")}
             className={`${
